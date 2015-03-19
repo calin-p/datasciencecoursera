@@ -1,8 +1,11 @@
 # read lables
-# just in case something has to be set setwd("./Assignments/UCI HAR Dataset")
+# just in case directory has to be set after unzipping the original data set
+#setwd("./Assignments/UCI HAR Dataset")
+
+# read features and keep only feature names
 features<-read.table("./features.txt", stringsAsFactors=FALSE)
-# keep only feature names
 features<-features$V2
+
 # reading separate feature data sets
 X_test<-read.table("./test/X_test.txt", col.names=features, stringsAsFactors=FALSE)
 X_train<-read.table("./train/X_train.txt", col.names=features, stringsAsFactors=FALSE)
@@ -37,8 +40,8 @@ X_all<-merge(X_data, activity, by="index")
 #add subject to global data set
 X_all<-merge(X_all, subject, by="index")
 
-
-# clean-up including index in X_data, activity and subject data sets to keep the feature number under control
+# clean-up including index in X_data, activity and subject data sets to keep the feature number 
+# under control just in case I may need to save the raw aggregated data
 X_all$index<-NULL
 X_data$index<-NULL
 activity$index<-NULL
@@ -63,13 +66,15 @@ names(X_data_reduced)[ncol(X_data_reduced)]<-"subject"
 activity_label<-read.table("./activity_labels.txt", strings=FALSE)
 activity_label<-activity_label$V2
 
-#replace headers with meaningful values for activity
+# replace headers with meaningful values for activity
 j<-1
 for (j in seq_along(activity_label)) {
     X_data_reduced$activity<-gsub(j, activity_label[j], X_data_reduced$activity)
 }
 
-#produce tidy data set depending on activity and subject
+# produce tidy data set depending on activity and subject
+# not exactly the fastest, but did the job
+
 X_data_reduced$subject<-as.factor(X_data_reduced$subject)
 tmp<-X_data_reduced[0,]
 for (j in seq_along(levels(X_data_reduced$subject))) { 
@@ -79,5 +84,8 @@ for (j in seq_along(levels(X_data_reduced$subject))) {
         tmp[nrow(tmp), "subject"]<-j
     }
 }
+
+# done
 # write the output file
 write.table(tmp, file="./Clean_data_project.txt", row.name=FALSE)
+# end
