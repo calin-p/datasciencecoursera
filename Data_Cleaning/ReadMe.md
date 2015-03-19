@@ -1,6 +1,8 @@
-ReadMe.md
+##Read Me
 
-This script (labeled "run_analysis.R") calculates the average values for all the values (train and test) that contains mean and standard deviation values of the measurements from accelerometers and gyroscopes used in the Human Activity Recognition experiment ran at Universitat Politècnica de Catalunya and Università degli Studi di Genova.
+This script (labeled "run_analysis.R") calculates the average values for all the values (train and test) that contains mean and standard deviation values of the measurements from accelerometers and gyroscopes used in the Human Activity Recognition experiment ran at Universitat Politècnica de Catalunya and Università degli Studi di Genova [1].
+
+The script does not change any measurements units or normalization factors from the initial data set.
 
 ###Data set structure
 The used dataset has the following structure:
@@ -59,7 +61,7 @@ The set of variables that were estimated from these signals are:
 * energy(): Energy measure. Sum of the squares divided by the number of values. 
 * iqr(): Interquartile range 
 * entropy(): Signal entropy
-* arCoeff(): Autorregresion coefficients with Burg order equal to 4
+* arCoeff(): Autoregression coefficients with Burg order equal to 4
 * correlation(): correlation coefficient between two signals
 * maxInds(): index of the frequency component with largest magnitude
 * meanFreq(): Weighted average of the frequency components to obtain a mean frequency
@@ -77,9 +79,9 @@ Additional vectors obtained by averaging the signals in a signal window sample. 
 * tBodyGyroJerkMean
 
 
-###Script structure and functioning
+###Script structure and functionality
 
-Each file from the two sub-sets, test and train, is read into a corresponding data frame (e.g. "X_test" data frame has the data from "X_test.txt" file). After reading from files amd joining the coresponding data we end up with follwing data frames:
+Each file from the two sub-sets, test and train, is read into a corresponding data frame (e.g. "X_test" data frame has the data from "X_test.txt" file). After reading from files amd joining the corresponding data we end up with following data frames:
 
 1. "X_data" resulted from row-binding "X_test" and "X_train"
 2. "activity" resulted from row-binding "activity_test" and "activity_train"
@@ -87,9 +89,9 @@ Each file from the two sub-sets, test and train, is read into a corresponding da
 
 To this data frames we add the "features" vector, where we read all the features list from "features.txt" file.
 
-After reading the data from files we will compose an overall data set (labeled "X_all") by joining together "X_data", "activity" and "subject". We temporarly add an additional attribute labeled "index" to all the data sets for the inner join operation. After joining them we labeled the atributes in "X_all"  using the strings from "features" vector plus separate labels for "activity" and "subject". We remove than the "index" atribute from all data sets. If needed, the overall raw data can be saved for other usage.
+After reading the data from files we will compose an overall data set (labeled "X_all") by joining together "X_data", "activity" and "subject". We temporary add an additional attribute labeled "index" to all the data sets for the inner join operation. After joining them we labeled the attributes in "X_all"  using the strings from "features" vector plus separate labels for "activity" and "subject". We remove than the "index" attribute from all data sets. If needed, the overall raw data can be saved for other usage.
 
-From the overall data set ("X_all") we keep only the attributes related with mean snd standard deviation for each measurement in "X_data_reduced" data frame. We change the type of "subject" attribute from int to factors and read the label for each activity in a vector (labeled "activity_label") from "activity_labels.txt" file. We use this vector to add proper names to the reduced data set.
+From the overall data set ("X_all") we keep only the attributes related with mean and standard deviation for each measurement in "X_data_reduced" data frame. We change the type of "subject" attribute from int to factors and read the label for each activity in a vector (labeled "activity_label") from "activity_labels.txt" file. We use this vector to add proper names to the reduced data set.
 
 From the reduced data set we proceeded to calculate the average of each variable for each activity and each subject. Each row contains the mean of the variables calculated over all the records associated wit a specific "activity" for each one of the subjects that ran the experiment.
 
