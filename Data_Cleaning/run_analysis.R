@@ -1,5 +1,5 @@
 # read lables
-#setwd("./Assignments/UCI HAR Dataset")
+# just in case something has to be set setwd("./Assignments/UCI HAR Dataset")
 features<-read.table("./features.txt", stringsAsFactors=FALSE)
 # keep only feature names
 features<-features$V2
@@ -31,7 +31,7 @@ names(subject)<-"subject"
 # adding index for inner join
 subject$index<-c(1:nrow(subject))
 
-#add activity to global data set
+#add activity to global data set using a different method
 X_all<-merge(X_data, activity, by="index")
 
 #add subject to global data set
@@ -47,21 +47,21 @@ subject$index<-NULL
 #give meaningful names to teh ovearall data set
 names(X_all)<-c(features, "activity", "subject")
 
-#build activity labels
-activity_label<-read.table("./activity_labels.txt", strings=FALSE)
-activity_label<-activity_label$V2
-
 # extracting only the the measurements on the mean and standard deviation
 # adding mean
 X_data_reduced<-X_all[,grep("*mean*", colnames(X_all))]
 # adding std
 X_data_reduced<-cbind(X_data_reduced, X_all[,grep("*std*", colnames(X_all))])
-# adding activity
+# adding activity and proper name
 X_data_reduced<-cbind(X_data_reduced, X_all[,grep("*activity*", colnames(X_all))])
 names(X_data_reduced)[ncol(X_data_reduced)]<-"activity"
-#adding subject
+#adding subject and proper name
 X_data_reduced<-cbind(X_data_reduced, X_all[,grep("*subject*", colnames(X_all))])
 names(X_data_reduced)[ncol(X_data_reduced)]<-"subject"
+
+#build activity labels
+activity_label<-read.table("./activity_labels.txt", strings=FALSE)
+activity_label<-activity_label$V2
 
 #replace headers with meaningful values for activity
 j<-1
