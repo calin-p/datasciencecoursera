@@ -78,10 +78,65 @@ Additional vectors obtained by averaging the signals in a signal window sample. 
 * tBodyGyroMean
 * tBodyGyroJerkMean
 
+From the original set of variables we will keep the 79 of them that measures mean and standard deviation. The 'variable-[X,Y,Z]' is the notation for the tuple (trio) of the {variable-X, variable-Y, variable-Z} meaning that the measurement is done for all the specified axes (so we have a measurement for each one of them). For example:
+	tBodyAcc-mean()-X,Y,Z = {tBodyAcc-mean()-X, tBodyAcc-mean()-Y, tBodyAcc-mean()-Z}
+We used this notation to show the significance of the measurements and to simplify the notation. The following variables are included:
+
+* tBodyAcc-mean()-[X,Y,Z]	
+* tGravityAcc-mean()-[X,Y,Z]
+* tBodyAccJerk-mean()-[X,Y,Z]
+* tBodyGyro-mean()-[X,Y,Z]
+* tBodyGyroJerk-mean()-[X,Y,Z]
+* tBodyAccMag-mean()
+* tGravityAccMag-mean()
+* tBodyAccJerkMag-mean()	
+* tBodyGyroMag-mean()	
+* tBodyGyroJerkMag-mean()	
+* fBodyAcc-mean()-[X,Y,Z]
+* fBodyAcc-meanFreq()-[X,Y,Z]
+* fBodyAccJerk-mean()-[X,Y,Z]
+* fBodyAccJerk-meanFreq()-[X,Y,Z]
+* fBodyGyro-mean()-[X,Y,Z]
+* fBodyGyro-meanFreq()-[X,Y,Z]
+* fBodyAccMag-mean()
+* fBodyAccMag-meanFreq()
+* fBodyBodyAccJerkMag-mean()
+* fBodyBodyAccJerkMag-meanFreq()
+* fBodyBodyGyroMag-mean()
+* fBodyBodyGyroMag-meanFreq()
+* fBodyBodyGyroJerkMag-mean()
+* fBodyBodyGyroJerkMag-meanFreq()
+* tBodyAcc-std()-[X,Y,Z]
+* tGravityAcc-std()-[X,Y,Z]
+* tBodyAccJerk-std()-[X,Y,Z]
+* tBodyGyro-std()-[X,Y,Z]
+* tBodyGyroJerk-std()-[X,Y,Z]
+* tBodyAccMag-std()
+* tGravityAccMag-std()
+* tBodyAccJerkMag-std()
+* tBodyGyroMag-std()
+* tBodyGyroJerkMag-std()
+* fBodyAcc-std()-[X,Y,Z]
+* fBodyAccJerk-std()-[X,Y,Z]
+* fBodyGyro-std()-[X,Y,Z]
+* fBodyAccMag-std()
+* fBodyBodyAccJerkMag-std()
+* fBodyBodyGyroMag-std()
+*fBodyBodyGyroJerkMag-std()
+
+We added two variables "activity" and "subject" that represent the type of activity that was run while the measurement was done, and the person (subject) that did it. There are 30 different subjects in this experiment that did 6 different activities:
+
+1. WALKING
+2. WALKING_UPSTAIRS
+3. WALKING_DOWNSTAIRS
+4. SITTING
+5. STANDING
+6. LAYING
+
 
 ###Script structure and functionality
 
-Each file from the two sub-sets, test and train, is read into a corresponding data frame (e.g. "X_test" data frame has the data from "X_test.txt" file). After reading from files amd joining the corresponding data we end up with following data frames:
+Each file from the two sub-sets, test and train, is read into a corresponding data frame (e.g. "X_test" data frame has the data from "X_test.txt" file). After reading from files and joining the corresponding data we end up with following data frames:
 
 1. "X_data" resulted from row-binding "X_test" and "X_train"
 2. "activity" resulted from row-binding "activity_test" and "activity_train"
@@ -99,7 +154,7 @@ This data set is the final product and we write it to a file labeled "Clean_data
 
 ###Licence:
 
-This data set is produced by Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita in November 2012 as base for the followin publication:
+This data set is produced by Jorge L. Reyes-Ortiz, Alessandro Ghio, Luca Oneto, Davide Anguita in November 2012 as base for the following publication:
 
 [1] Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
 
